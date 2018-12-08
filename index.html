@@ -20,8 +20,27 @@
                 <div class="row">
                     <div v-for="userTweets in usersTweets" class="col">
                         <div v-for="tweet in userTweets">
-                            <b>{{ tweet.user.name }}</b>
-                            <p>{{ tweet.text }}</p>
+                            <div class="tweet-header">
+                                <div v-if="tweet.retweeted_status" class="retweet-banner">
+                                    <div>{{ tweet.user.name }} <i>Retweeted</i></span></div>
+                                    <b><a :href="'https://twitter.com/' + getRetweetUser(tweet.text)">{{ getUserMentionName(tweet) }}</a></b> 
+                                    @{{ getRetweetUser(tweet.text) }} {{ getElapsedTime(tweet.created_at) }}
+                                </div>
+                                <div v-if="!tweet.retweeted_status" class="retweet-banner">
+                                    <b><a :href="'https://twitter.com/' + tweet.user.screen_name">{{ tweet.user.name }}</a></b> 
+                                    @{{ tweet.user.screen_name }} {{ getElapsedTime(tweet.created_at) }}
+                                </div>
+                            </div>
+                            <p>
+                                <span v-if="tweet.retweeted_status">
+                                    {{ tweet.retweeted_status.text }} 
+                                </span>
+                                <span v-if="!tweet.retweeted_status">
+                                    {{ tweet.text }} 
+                                </span>
+                                <a v-if="tweet.retweeted_status" target="blank" :href="`https://twitter.com/${getRetweetUser(tweet.text)}/status/${tweet.retweeted_status.id_str}`"><small>See More</small></a>
+                                <a v-if="!tweet.retweeted_status" target="blank" :href="`https://twitter.com/${tweet.user.screen_name}/status/${tweet.id}`"><small>See More</small></a>
+                            </p>
                         </div>
                     </div>
                 </div>
