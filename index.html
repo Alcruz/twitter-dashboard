@@ -13,12 +13,18 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <style>
+            .app-user-column {
+                height:100vh;
+                overflow-y: scroll;
+            }
+        </style>
     </head>
     <body>
         <div id="app">
             <div class="container-fluid">
                 <div class="row">
-                    <div v-for="userTweets in usersTweets" class="col">
+                    <div v-for="userTweets in usersTweets" class="app-user-column col">
                         <div v-for="tweet in userTweets">
                             <div class="tweet-header">
                                 <div v-if="tweet.retweeted_status" class="retweet-banner">
